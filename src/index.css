@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+/* Initial states for anime.js targeted elements - removed to prevent invisible content */
+
 /* Notification popup animations */
 @keyframes slide-in {
   from {
@@ -30,4 +32,3 @@
 .animate-slide-out {
   animation: slide-out 0.3s ease-in forwards;
 }
-

@@ -5,6 +5,7 @@ import { ProductContext } from "../Context/Productcontext/ProductContext";
 import { TbArrowsShuffle } from "react-icons/tb";
 import { IoArrowBack } from "react-icons/io5";
 import Maincard from './Maincard';
+import { productCardAnimation, pageLoadAnimation, buttonPulseAnimation, imageFadeInAnimation } from '../utils/animeAnimations';
 
 function Bag() {
   const navigate = useNavigate();
@@ -28,6 +29,14 @@ function Bag() {
       setShuffledBags(shuffleArray(bagsData));
     }
   }, [bagsData]);
+
+  useEffect(() => {
+    pageLoadAnimation();
+    setTimeout(() => {
+      productCardAnimation();
+      imageFadeInAnimation();
+    }, 300);
+  }, [shuffledBags]);
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
@@ -53,7 +62,7 @@ function Bag() {
   return (
     <div>
       {/*  Title */}
-      <h1 className="bg-gray-100 px-4 py-2 mt-20 text-xl font-mono flex items-center gap-2">
+      <h1 className="bg-gray-100 px-4 py-2 mt-20 text-xl font-mono flex items-center gap-2 animate-page-load">
         Bags{" "}
         <span className="text-sm text-gray-600">
           ({shuffledBags?.length || 0} items)
@@ -64,13 +73,15 @@ function Bag() {
       <div className="flex justify-between  items-center mt-5 px-4">
         <button
           onClick={handleShuffle}
-          className="hover:bg-gray-100 rounded px-2 py-2 transition flex items-center gap-2"
+          onMouseEnter={(e) => buttonPulseAnimation(e.currentTarget)}
+          className="hover:bg-gray-100 rounded px-2 py-2 transition flex items-center gap-2 animate-page-load"
         >
           <TbArrowsShuffle className="text-lg" />
         </button>
         <button
           onClick={() => navigate("/")}
-          className="px-4 py-2 text-black transition hover:bg-gray-100 rounded flex items-center gap-2"
+          onMouseEnter={(e) => buttonPulseAnimation(e.currentTarget)}
+          className="px-4 py-2 text-black transition hover:bg-gray-100 rounded flex items-center gap-2 animate-page-load"
         >
           <IoArrowBack className="text-lg" />
           Back 
@@ -98,13 +109,13 @@ function Bag() {
                 key={item.id}
                 data-product-id={item.id}
                 onClick={() => handleProductClick(item)}
-                className="bg-white overflow-hidden hover:scale-105 transform transition duration-300 ease-in-out w-full cursor-pointer shadow-sm hover:shadow-md"
+                className="bg-white overflow-hidden hover:scale-105 transform transition duration-300 ease-in-out w-full cursor-pointer shadow-sm hover:shadow-md animate-product-card"
               >
                 <div className="relative h-64 sm:h-72 md:h-80 w-full">
                   <img
                     src={item.Img}
                     alt={item.Name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover animate-image-fade"
                   />
                   <span className="absolute top-2 left-2 bg-black text-white text-[10px] px-2 py-0.5 uppercase">
                     New
@@ -128,7 +139,7 @@ function Bag() {
                 <img
                   src="https://i.pinimg.com/1200x/11/cc/4e/11cc4e336d6921cad883492d57a3e192.jpg"
                   alt="Special"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover animate-image-fade"
                 />
               </div>
 
@@ -139,13 +150,13 @@ function Bag() {
                     key={item.id}
                     data-product-id={item.id}
                     onClick={() => handleProductClick(item)}
-                    className="bg-white overflow-hidden mt-6 hover:scale-105 transform transition duration-300 ease-in-out w-full"
+                    className="bg-white overflow-hidden mt-6 hover:scale-105 transform transition duration-300 ease-in-out w-full animate-product-card"
                   >
                     <div className="relative h-64 sm:h-72 md:h-100 w-full">
                       <img
                         src={item.Img}
                         alt={item.Name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover animate-image-fade"
                       />
                       <span className="absolute top-2 left-2 bg-black text-white text-[10px] px-2 py-0.5 uppercase">
                         New
@@ -170,13 +181,13 @@ function Bag() {
                 key={item.id}
                 data-product-id={item.id}
                 onClick={() => handleProductClick(item)}
-                className="bg-white overflow-hidden hover:scale-105 transform transition duration-300 ease-in-out w-full cursor-pointer shadow-sm hover:shadow-md"
+                className="bg-white overflow-hidden hover:scale-105 transform transition duration-300 ease-in-out w-full cursor-pointer shadow-sm hover:shadow-md animate-product-card"
               >
                 <div className="relative h-64 sm:h-72 md:h-80 w-full">
                   <img
                     src={item.Img}
                     alt={item.Name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover animate-image-fade"
                   />
                   <span className="absolute top-2 left-2 bg-black text-white text-[10px] px-2 py-0.5 uppercase">
                     New

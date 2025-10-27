@@ -1,5 +1,5 @@
 // src/components/HeroSection/HeroSection.jsx
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom"; // <-- import Link
 import BackGround from "../../assets/BackGround.png";
@@ -9,8 +9,18 @@ import {
   heroTitleAnim,
   heroButtonAnim,
 } from "./animations";
+import { heroTextAnimation } from "../../utils/animeAnimations";
 
 const HeroSection = () => {
+  const heroRef = useRef(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      heroTextAnimation();
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="bg-[#ceccc7] w-full min-h-screen relative flex flex-col items-center justify-center overflow-hidden">
       {/* Background */}
@@ -26,7 +36,7 @@ const HeroSection = () => {
         {...heroContainerAnim}
       >
         <motion.h1
-          className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl font-serif text-black text-center"
+          className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl font-serif text-black text-center animate-hero-text"
           {...heroTitleAnim}
           whileHover={{ scale: 1.05 }}
         >
@@ -34,7 +44,7 @@ const HeroSection = () => {
         </motion.h1>
 
         <motion.div
-          className="flex gap-4 sm:gap-6 font-medium text-sm sm:text-md"
+          className="flex gap-4 sm:gap-6 font-medium text-sm sm:text-md animate-hero-text"
           {...heroButtonAnim}
         >
           {/* Correct Link */}

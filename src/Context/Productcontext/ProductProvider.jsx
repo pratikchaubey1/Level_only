@@ -22,7 +22,7 @@ function ProductProvider({ children }) {
       id: 2,
       Name: "Nike Air Jordan",
       Price: 18000,
-      Img: "https://i.pinimg.com/736x/3e/12/eb/3e12eb1d1b35de8c0e5284135db4cc78.jpg",
+      Img: "https://i.pinimg.com/736x/89/9e/e5/899ee54d2e6234acb07ce1cefb4d9d79.jpg",
       category: "Sneakers",
       Description: "The legendary Nike Air Jordan combines basketball heritage with street style. Premium materials, Air-Sole unit cushioning, and the iconic Jumpman logo make this a timeless classic for both performance and fashion."
     },
@@ -30,7 +30,7 @@ function ProductProvider({ children }) {
       id: 3,
       Name: "Nike Air Force",
       Price: 17000,
-      Img: "https://i.pinimg.com/1200x/38/3e/47/383e47bd2935ca5d8f1ce162396d9c9d.jpg",
+      Img: "https://i.pinimg.com/1200x/f4/a2/f9/f4a2f95d2a5532ed98457344f98ec190.jpg",
       category: "Sneakers",
       Description: "Classic Nike Air Force 1 with full-grain leather construction, perforations for breathability, and pivot points for natural motion. A basketball icon reimagined for everyday style and comfort."
     },
@@ -70,7 +70,7 @@ function ProductProvider({ children }) {
       id: 8,
       Name: "Nike Air Zoom Pegasus",
       Price: 18500,
-      Img: "https://i.pinimg.com/1200x/f4/ce/86/f4ce86b9b0c18bf938aee7a7916f396c.jpg",
+      Img: "https://i.pinimg.com/1200x/14/95/85/149585f10596a5406b8d37dd00a1f791.jpg",
       category: "Sneakers",
       Description: "Versatile Nike Air Zoom Pegasus designed for runners of all levels. Features Zoom Air units for responsive cushioning, breathable mesh upper, and durable rubber outsole for long-lasting performance."
     },

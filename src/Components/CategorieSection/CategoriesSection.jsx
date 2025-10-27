@@ -1,11 +1,21 @@
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { categories } from "./categories";
 import { categoryTitleAnim, categoryCardAnim } from "./animations";
 import { Link } from "react-router-dom";
+import { categoryCardsAnimation, cardHoverAnimation, cardHoverOutAnimation } from "../../utils/animeAnimations";
 
 const CategoriesSection = () => {
+  const categoryRefs = useRef([]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      categoryCardsAnimation();
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="relative w-full">
       {/* Title */}
@@ -24,6 +34,7 @@ const CategoriesSection = () => {
         {categories.map((item, index) => (
           <Link to={item.path} key={item.id}>
             <motion.div
+              ref={el => categoryRefs.current[index] = el}
               {...categoryCardAnim(index)}
               whileHover={{
                 scale: 1.05,
@@ -33,13 +44,15 @@ const CategoriesSection = () => {
                 scale: 0.95,
                 transition: { duration: 0.1 },
               }}
-              className="bg-white/90 hover:bg-white overflow-hidden cursor-pointer "
+              onMouseEnter={(e) => cardHoverAnimation(e.currentTarget)}
+              onMouseLeave={(e) => cardHoverOutAnimation(e.currentTarget)}
+              className="bg-white/90 hover:bg-white overflow-hidden cursor-pointer animate-category-card"
             >
               {/* Image */}
               <img
                 src={item.Img}
                 alt={item.Name}
-                className="w-full h-48 sm:h-64 md:h-72 lg:h-80 object-cover "
+                className="w-full h-48 sm:h-64 md:h-72 lg:h-80 object-cover animate-image-fade"
               />
 
               {/* Title */}

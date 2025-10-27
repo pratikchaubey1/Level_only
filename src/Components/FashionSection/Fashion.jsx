@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import One from "../../assets/One.png"; // apni image ka path
 import { containerVariants, titleVariants, buttonVariants } from "./Fashionanimation"; // ✅ import animation
+import { imageFadeInAnimation, buttonPulseAnimation } from "../../utils/animeAnimations";
 
 function Fashion() {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      imageFadeInAnimation();
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="flex justify-center mt-15 px-4">
       <motion.div
@@ -15,7 +23,7 @@ function Fashion() {
       >
         {/* Background Image */}
         <div
-          className="absolute inset-0 bg-center bg-cover rounded-lg shadow-lg"
+          className="absolute inset-0 bg-center bg-cover rounded-lg shadow-lg animate-image-fade"
           style={{ backgroundImage: `url(${One})` }}
         ></div>
 
@@ -32,10 +40,11 @@ function Fashion() {
 
           <Link to="/All">
             <motion.button
-              className="py-2 px-6 sm:py-3 sm:px-8 bg-white/20 rounded-md text-black font-medium transition duration-300 hover:backdrop-blur-sm hover:bg-white/30"
+              className="py-2 px-6 sm:py-3 sm:px-8 bg-white/20 rounded-md text-black font-medium transition duration-300 hover:backdrop-blur-sm hover:bg-white/30 animate-page-load"
               variants={buttonVariants} //  connect button animation
               whileHover="hover"
               whileTap="tap"
+              onMouseEnter={(e) => buttonPulseAnimation(e.currentTarget)}
             >
               SHOP THE NEW COLLECTION
             </motion.button>

@@ -1,0 +1,26 @@
+Template for applying animations to Shirt.jsx, Jeans.jsx, and Bag.jsx:
+
+1. Add imports at the top:
+import { productCardAnimation, pageLoadAnimation, buttonPulseAnimation, imageFadeInAnimation } from '../utils/animeAnimations';
+
+2. Add useEffect after existing useEffects:
+  useEffect(() => {
+    pageLoadAnimation();
+    setTimeout(() => {
+      productCardAnimation();
+      imageFadeInAnimation();
+    }, 300);
+  }, [shuffledData]); // Replace shuffledData with appropriate state variable
+
+3. Update title h1:
+Add class: animate-page-load
+
+4. Update buttons:
+Add onMouseEnter={(e) => buttonPulseAnimation(e.currentTarget)}
+Add class: animate-page-load
+
+5. Update product cards:
+Add class: animate-product-card to card div
+Add class: animate-image-fade to img tags
+
+This pattern applies to Shirt.jsx, Jeans.jsx, and Bag.jsx

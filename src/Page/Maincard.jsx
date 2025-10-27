@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { FiX, FiPhoneCall, FiMapPin, FiPlusCircle } from 'react-icons/fi';
 import Navbar from '../Components/Navbar/Navbar';
 import { ProductContext } from '../Context/Productcontext/ProductContext';
@@ -6,10 +6,22 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { modalEntranceAnimation, productCardAnimation, imageFadeInAnimation } from '../utils/animeAnimations';
 
 function Maincard({ product, onClose, isOpen, onProductSelect }) {
   const [selectedSize, setSelectedSize] = useState('');
   const { alldata, addToCart } = useContext(ProductContext);
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    if (isOpen && modalRef.current) {
+      modalEntranceAnimation(modalRef.current);
+      setTimeout(() => {
+        imageFadeInAnimation();
+        productCardAnimation();
+      }, 200);
+    }
+  }, [isOpen, product]);
 
   if (!isOpen || !product) return null;
 
@@ -51,7 +63,7 @@ function Maincard({ product, onClose, isOpen, onProductSelect }) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 overflow-y-auto z-50">
-      <div className="fixed inset-0 bg-white overflow-y-auto z-50 maincard-modal-container">
+      <div ref={modalRef} className="fixed inset-0 bg-white overflow-y-auto z-50 maincard-modal-container">
     
         {/* Cancel Button */}
         <button
@@ -70,7 +82,7 @@ function Maincard({ product, onClose, isOpen, onProductSelect }) {
               <img
                 src={product.Img}
                 alt={product.Name}
-                className="w-full h-full md:w-150 md:h-140 object-cover"
+                className="w-full h-full md:w-150 md:h-140 object-cover animate-image-fade"
               />
             </div>
 
@@ -192,13 +204,13 @@ function Maincard({ product, onClose, isOpen, onProductSelect }) {
                   <SwiperSlide key={relatedProduct.id}>
                     <div
                       onClick={() => handleRelatedProductClick(relatedProduct)}
-                      className="bg-white shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer group"
+                      className="bg-white shadow-sm hover:shadow-md transition-shadow duration-300 cursor-pointer group animate-product-card"
                     >
                       <div className="aspect-square overflow-hidden ">
                         <img
                           src={relatedProduct.Img}
                           alt={relatedProduct.Name}
-                          className="w-full h-full object-cover  transition-transform duration-300"
+                          className="w-full h-full object-cover transition-transform duration-300 animate-image-fade"
                         />
                       </div>
                       <div className="p-3">

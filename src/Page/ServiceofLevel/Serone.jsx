@@ -8,7 +8,7 @@ import {
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import SerOneVid from "../../assets/serOne.mp4";
+import SerOneVid from "../../assets/Kone.mp4";
 import NikeOne from "../../assets/NikeOne.png";
 import NikeTwo from "../../assets/NikeTwo.png";
 import Cone from "../../assets/COne.png";
@@ -134,7 +134,7 @@ function Serone() {
               <img
                 src={item.Img}
                 alt={item.name}
-                className="w-full h-[430px] object-cover rounded-t-xl"
+                className="w-full h-[500px] object-cover rounded-t-xl"
               />
               <h1 className="relative text-xl font-sans text-black text-center py-4 pb-1 group">
                 {item.name}

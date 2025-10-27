@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { footerAnimation } from "../../utils/animeAnimations";
 
 function Footer() {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      footerAnimation();
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <footer className="bg-black text-gray-200 px-4 py-14 mt-10">
+    <footer className="bg-black text-gray-200 px-4 py-14 mt-10 animate-footer">
       {/* Top Main Section */}
       <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
         {/* Left Info */}
