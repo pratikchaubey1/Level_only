@@ -1,18 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiUser } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { ProductContext } from "../../Context/Productcontext/ProductContext";
 
 function ProfileMenu() {
   const [profileOpen, setProfileOpen] = useState(false);
   const menuRef = useRef(null);
+  const { isAuthenticated, logoutUser } = useContext(ProductContext);
 
-  const menuItems = [
-    { to: "/Login", text: "SIGN IN" },
-    // { to: "/orders", text: "MY ORDERS" },
-    // { to: "/address", text: "ADDRESS BOOK" },
-    // { to: "/saved", text: "SAVED ITEMS" },
-  ];
+  const menuItems = isAuthenticated
+    ? [
+        { to: null, text: "LOG OUT", onClick: () => logoutUser() },
+      ]
+    : [
+        { to: "/Login", text: "SIGN IN" },
+        { to: "/Signup", text: "SIGN UP" },
+      ];
 
   // Animation variants
   const dropdownVariants = {
@@ -51,17 +55,30 @@ function ProfileMenu() {
             animate="visible"
             exit="exit"
             variants={dropdownVariants}
-            className="absolute right-0 top-12 bg-white shadow-lg rounded-md w-56 h-20 z-50 font-poppins"
+            className="absolute right-0 top-12  bg-white shadow-lg rounded-md w-56 h-auto z-50 font-poppins"
           >
             {menuItems.map((item, i) => (
-              <Link
-                key={i}
-                to={item.to}
-                className="block px-4 py-2 mt-5 text-sm font-medium text-gray-700 hover:bg-gray-100"
-                onClick={() => setProfileOpen(false)}
-              >
-                {item.text}
-              </Link>
+              item.to ? (
+                <Link
+                  key={i}
+                  to={item.to}
+                  className="block px-4 py-2 mt-5 text-sm font-medium text-gray-700 hover:bg-gray-100"
+                  onClick={() => setProfileOpen(false)}
+                >
+                  {item.text}
+                </Link>
+              ) : (
+                <button
+                  key={i}
+                  className="w-full text-left block px-4 py-2 mt-1 text-sm font-medium text-gray-700 hover:bg-gray-100"
+                  onClick={() => {
+                    item.onClick?.();
+                    setProfileOpen(false);
+                  }}
+                >
+                  {item.text}
+                </button>
+              )
             ))}
           </motion.div>
         )}

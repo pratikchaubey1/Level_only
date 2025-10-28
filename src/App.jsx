@@ -15,7 +15,10 @@ import SerThree from "./Page/ServiceofLevel/SerThree";
 import Serone from "./Page/ServiceofLevel/Serone";
 import Instore from "./Page/ServiceofLevel/Instore";
 import Login from "./Page/Login";
-
+import Signup from "./Page/Signup";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "./styles/toast.css";
 
 function App() {
   const location = useLocation();
@@ -41,8 +44,10 @@ function App() {
            <Route path="/SerOne" element={<Serone/>}/>
            <Route path="/Instore" element={<Instore/>}/>
            <Route path="/Login" element={<Login/>}/>
+           <Route path="/Signup" element={<Signup/>}/>
         </Routes>
       </div>
+      <ToastContainer position="top-right" autoClose={2000} newestOnTop limit={1} closeOnClick draggable={false} hideProgressBar={false} />
     </div>
   );
 }

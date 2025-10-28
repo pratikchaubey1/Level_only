@@ -8,6 +8,26 @@ import {
 import { FaRegCircle, FaDotCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { ProductContext } from "../../Context/Productcontext/ProductContext";
+import { Link } from "react-router-dom";
+
+function AuthCheckoutButton() {
+  const { isAuthenticated } = useContext(ProductContext);
+  const navigate = useNavigate();
+  if (!isAuthenticated) {
+    return (
+      <Link to="/Login" className="w-full block">
+        <button className="w-full bg-teal-600 text-white py-3 rounded mt-6 font-semibold tracking-wide hover:bg-teal-700 transition">
+          SIGN IN TO CHECKOUT
+        </button>
+      </Link>
+    );
+  }
+  return (
+    <button className="w-full bg-black text-white py-3 rounded mt-6 font-semibold tracking-wide hover:bg-gray-900 transition" onClick={() => navigate('/checkout')}>
+      PROCEED TO CHECKOUT
+    </button>
+  );
+}
 
 function CartPage() {
   const navigate = useNavigate();
@@ -147,9 +167,12 @@ function CartPage() {
               <span>Total</span>
               <span>₹{subtotal}.00</span>
             </div>
-            <button className="w-full bg-black text-white py-3 rounded mt-6 font-semibold tracking-wide hover:bg-gray-900 transition">
-              PROCEED TO CHECKOUT
-            </button>
+            {/* If not logged in, show Sign in CTA */}
+            {cart.length > 0 && (
+              <>
+                <AuthCheckoutButton />
+              </>
+            )}
             <button
               onClick={() => navigate("/")}
               className="w-full mt-3 py-2 text-black opacity-70 hover:underline"

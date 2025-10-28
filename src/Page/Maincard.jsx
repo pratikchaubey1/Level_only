@@ -7,6 +7,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { modalEntranceAnimation, productCardAnimation, imageFadeInAnimation } from '../utils/animeAnimations';
+import { toast } from 'react-toastify';
 
 function Maincard({ product, onClose, isOpen, onProductSelect }) {
   const [selectedSize, setSelectedSize] = useState('');
@@ -32,6 +33,8 @@ function Maincard({ product, onClose, isOpen, onProductSelect }) {
 
   const handleAddToCart = () => {
     if (!selectedSize) {
+      toast.dismiss('size-required');
+      toast.warn('Please select a size', { toastId: 'size-required' });
       return;
     }
     
@@ -120,7 +123,14 @@ function Maincard({ product, onClose, isOpen, onProductSelect }) {
                 <p className="text-gray-700 text-lg font-medium">Size</p>
                 <select
                   value={selectedSize}
-                  onChange={(e) => setSelectedSize(e.target.value)}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setSelectedSize(val);
+                    if (val) {
+                      toast.dismiss('size-selected');
+                      toast.info(`Size ${val} selected`, { toastId: 'size-selected', autoClose: 1200 });
+                    }
+                  }}
                   className="w-full mt-2 px-4 md:px-6 py-2 md:py-3 border rounded-lg text-lg font-medium hover:bg-gray-100 cursor-pointer"
                 >
                   <option value="">Select Size</option>

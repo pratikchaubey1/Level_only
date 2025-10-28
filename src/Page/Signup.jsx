@@ -1,34 +1,44 @@
 import React, { useState, useContext } from 'react';
-import { login as loginApi } from '../api/auth';
+import { signup as signupApi } from '../api/auth';
 import { ProductContext } from '../Context/Productcontext/ProductContext';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Signup = () => {
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { loginUser } = useContext(ProductContext);
   const navigate = useNavigate();
 
+  const validateEmail = (email) => {
+    // Very basic email pattern
+    return /\S+@\S+\.\S+/.test(email);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
-    // Validation
     if (!username.trim()) {
+      setError('Please enter your username');
+      return;
+    }
+    if (!email.trim()) {
       setError('Please enter your email');
       return;
     }
-
-    if (!password) {
-      setError('Please enter your password');
+    if (!validateEmail(email)) {
+      setError('Please enter a valid email address');
       return;
     }
-
+    if (!password) {
+      setError('Please enter a password');
+      return;
+    }
     if (password.length < 6) {
       setError('Password must be at least 6 characters');
       return;
@@ -36,19 +46,19 @@ const Login = () => {
 
     try {
       setLoading(true);
-      const data = await loginApi({ username, password });
+      const data = await signupApi({ username, email, password });
       const token = data?.token;
       if (token) {
-        loginUser(token, rememberMe);
+        loginUser(token, false);
       }
-      toast.success(`Login successful! Welcome ${data?.user?.username || username}`);
+      toast.success(`Signup successful! Welcome ${data?.user?.username || username}`);
       navigate('/');
       // Reset form
       setUsername('');
+      setEmail('');
       setPassword('');
-      setRememberMe(false);
     } catch (err) {
-      const msg = err?.message || 'Login failed';
+      const msg = err?.message || 'Signup failed';
       setError(msg);
       toast.error(msg);
     } finally {
@@ -63,16 +73,15 @@ const Login = () => {
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-3xl sm:text-4xl font-semibold text-gray-900 mb-2 tracking-tight">
-              Welcome Back
+              Create Your Account
             </h1>
             <p className="text-sm text-gray-500">
-              Please enter your credentials to continue
+              Please fill out the form to sign up
             </p>
           </div>
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Error Message */}
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm">
                 {error}
@@ -81,11 +90,8 @@ const Login = () => {
 
             {/* Username Field */}
             <div>
-              <label 
-                htmlFor="username" 
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
-                Email
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
+                Username
               </label>
               <input
                 type="text"
@@ -93,6 +99,25 @@ const Login = () => {
                 value={username}
                 onChange={(e) => {
                   setUsername(e.target.value);
+                  setError('');
+                }}
+                placeholder="Enter your username"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-400"
+                autoComplete="username"
+              />
+            </div>
+
+            {/* Email Field */}
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
                   setError('');
                 }}
                 placeholder="Enter your email"
@@ -103,10 +128,7 @@ const Login = () => {
 
             {/* Password Field */}
             <div>
-              <label 
-                htmlFor="password" 
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                 Password
               </label>
               <div className="relative">
@@ -120,7 +142,7 @@ const Login = () => {
                   }}
                   placeholder="Enter your password"
                   className="w-full px-4 py-3 pr-20 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-400"
-                  autoComplete="current-password"
+                  autoComplete="new-password"
                 />
                 <button
                   type="button"
@@ -132,42 +154,21 @@ const Login = () => {
               </div>
             </div>
 
-            {/* Remember Me & Forgot Password */}
-            <div className="flex items-center justify-between text-sm">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 rounded border-gray-300 text-teal-600 focus:ring-2 focus:ring-teal-500 cursor-pointer"
-                />
-                <span className="text-gray-700">Remember me</span>
-              </label>
-              <a 
-                href="#" 
-                className="text-teal-600 hover:text-teal-700 font-medium transition-colors"
-              >
-                Forgot password?
-              </a>
-            </div>
-
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
               className={`w-full bg-teal-600 hover:bg-teal-700 active:bg-teal-800 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? 'Signing up...' : 'Sign Up'}
             </button>
 
-            {/* Sign Up Link */}
             <div className="text-center text-sm text-gray-600">
-              Don't have an account?{' '}
-              <a 
-                href="/Signup" 
+              Already have an account?{' '}
+              <a
+                href="/Login"
                 className="text-teal-600 hover:text-teal-700 font-medium transition-colors"
               >
-                Sign up
+                Sign In
               </a>
             </div>
           </form>
@@ -177,4 +178,4 @@ const Login = () => {
   );
 }
 
-export default Login;
+export default Signup;
