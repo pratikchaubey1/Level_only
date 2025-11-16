@@ -1,58 +1,63 @@
-
-import React, { useEffect, useRef } from "react";
+// CategoriesSection.jsx
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
-import { categories } from "./categories";
-import { categoryTitleAnim, categoryCardAnim } from "./animations";
 import { Link } from "react-router-dom";
-import { categoryCardsAnimation, cardHoverAnimation, cardHoverOutAnimation } from "../../utils/animeAnimations";
+import { categories } from "./categories";
+
+// import variants
+import { containerVariants, titleVariant, cardVariant } from "./animations";
+// import hover utils
+import { cardHoverAnimation, cardHoverOutAnimation } from "./hoverHandlers";
 
 const CategoriesSection = () => {
   const categoryRefs = useRef([]);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      categoryCardsAnimation();
-    }, 100);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <div className="relative w-full">
       {/* Title */}
       <motion.div
         className="mt-10"
-        {...categoryTitleAnim}
-        viewport={{ once: true }}
+        variants={titleVariant}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.4 }}
       >
         <h1 className="text-3xl font-medium mb-6 text-black text-center">
-         EXPLORE THE LATEST STYLES
+          EXPLORE THE LATEST STYLES
         </h1>
       </motion.div>
 
-      {/* Category Grid */}
-      <div className="px-4 sm:px-10 mt-10 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8">
+      {/* Grid container with stagger */}
+      <motion.div
+        className="px-4 sm:px-10 mt-10 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
         {categories.map((item, index) => (
-          <Link to={item.path} key={item.id}>
+          <Link to={item.path} key={item.id} className="group">
             <motion.div
-              ref={el => categoryRefs.current[index] = el}
-              {...categoryCardAnim(index)}
-              whileHover={{
-                scale: 1.05,
-                transition: { duration: 0.2, ease: "easeOut" },
-              }}
-              whileTap={{
-                scale: 0.95,
-                transition: { duration: 0.1 },
-              }}
+              ref={(el) => (categoryRefs.current[index] = el)}
+              variants={cardVariant}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              whileHover={{ scale: 1.04, transition: { duration: 0.18 } }}
+              whileTap={{ scale: 0.96 }}
               onMouseEnter={(e) => cardHoverAnimation(e.currentTarget)}
               onMouseLeave={(e) => cardHoverOutAnimation(e.currentTarget)}
-              className="bg-white/90 hover:bg-white overflow-hidden cursor-pointer animate-category-card"
+              className="bg-white overflow-hidden cursor-pointer   relative"
             >
               {/* Image */}
-              <img
+              <motion.img
                 src={item.Img}
                 alt={item.Name}
-                className="w-full h-48 sm:h-64 md:h-72 lg:h-80 object-cover animate-image-fade"
+                initial={{ scale: 1.02 }}
+                whileInView={{ scale: 1 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="w-full h-48 sm:h-64 md:h-72 lg:h-80 object-cover"
               />
 
               {/* Title */}
@@ -62,7 +67,7 @@ const CategoriesSection = () => {
             </motion.div>
           </Link>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };

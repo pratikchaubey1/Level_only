@@ -23,7 +23,7 @@ function AuthCheckoutButton() {
     );
   }
   return (
-    <button className="w-full bg-black text-white py-3 rounded mt-6 font-semibold tracking-wide hover:bg-gray-900 transition" onClick={() => navigate('/checkout')}>
+    <button className="w-full bg-black text-white py-3 rounded mt-6 font-semibold tracking-wide hover:bg-gray-900 transition" onClick={() => navigate('/Dev')}>
       PROCEED TO CHECKOUT
     </button>
   );
