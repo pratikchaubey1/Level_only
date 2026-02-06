@@ -55,7 +55,7 @@ function ProductProvider({ children }) {
   }, []);
 
   // Filter products by category
-  const sneakersData = alldata.filter((item) => item.category === "Sneakers");
+  const sneakersData = alldata.filter((item) => item.category === "Shoes");
   const bagsData = alldata.filter((item) => item.category === "Bags");
   const jeansData = alldata.filter((item) => item.category === "Jeans");
   const shirtsData = alldata.filter((item) => item.category === "Shirts");

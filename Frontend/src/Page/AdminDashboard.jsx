@@ -96,13 +96,17 @@ const AdminDashboard = () => {
           </div>
           <div>
             <label className="block text-xs font-medium text-gray-700 mb-1">Category</label>
-            <input
-              type="text"
+            <select
               className="w-full border px-2 py-1 rounded text-sm"
               value={newProduct.category}
               onChange={(e) => setNewProduct((p) => ({ ...p, category: e.target.value }))}
-              placeholder="Sneakers, Bags, ..."
-            />
+            >
+              <option value="">Select category</option>
+              <option value="Shoes">Shoes</option>
+              <option value="Shirts">Shirts</option>
+              <option value="Bags">Bags</option>
+              <option value="Jeans">Jeans</option>
+            </select>
           </div>
           <div>
             <label className="block text-xs font-medium text-gray-700 mb-1">Price</label>
