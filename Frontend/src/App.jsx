@@ -31,11 +31,11 @@ function App() {
   const isAdminRoute = location.pathname.toLowerCase().startsWith('/admin');
 
   return (
-    <div className=" bg-white/90 min-h-screen flex flex-col">
+    <div className=" bg-white min-h-screen flex flex-col">
       {/* Show Navbar and Footer only on customer site, not admin area */}
       {!isAdminRoute && <Navbar />}
 
-      <div className={noPaddingOnLanding || isAdminRoute ? "flex-1" : "mt-22 flex-1"}>
+      <div className={noPaddingOnLanding || isAdminRoute ? "flex-1" : "mt-20 flex-1"}>
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/Bag" element={<Bag />} />

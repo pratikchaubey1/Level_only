@@ -68,7 +68,7 @@ function CartPage() {
           onClick={() => navigate("/")}
           className="px-4 py-2 text-black transition hover:bg-gray-100 rounded flex items-center gap-2 text-base"
         >
-          <IoArrowBack className="text-lg" /> Back
+          <IoArrowBack className="text-2xl" /> Back
         </button>
       </div>
 

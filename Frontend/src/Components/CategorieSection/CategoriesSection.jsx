@@ -4,9 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { categories } from "./categories";
 
-// import variants
 import { containerVariants, titleVariant, cardVariant } from "./animations";
-// import hover utils
 import { cardHoverAnimation, cardHoverOutAnimation } from "./hoverHandlers";
 
 const CategoriesSection = () => {
@@ -14,6 +12,7 @@ const CategoriesSection = () => {
 
   return (
     <div className="relative w-full">
+      
       {/* Title */}
       <motion.div
         className="mt-10"
@@ -27,9 +26,9 @@ const CategoriesSection = () => {
         </h1>
       </motion.div>
 
-      {/* Grid container with stagger */}
+      {/* Grid */}
       <motion.div
-        className="px-4 sm:px-10 mt-10 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-8"
+        className="px-5 sm:px-10 mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
@@ -37,33 +36,43 @@ const CategoriesSection = () => {
       >
         {categories.map((item, index) => (
           <Link to={item.path} key={item.id} className="group">
+            
             <motion.div
               ref={(el) => (categoryRefs.current[index] = el)}
               variants={cardVariant}
               custom={index}
               initial="hidden"
               whileInView="visible"
-              whileHover={{ scale: 1.04, transition: { duration: 0.18 } }}
-              whileTap={{ scale: 0.96 }}
+
+              //  Hover reduced
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
+
               onMouseEnter={(e) => cardHoverAnimation(e.currentTarget)}
               onMouseLeave={(e) => cardHoverOutAnimation(e.currentTarget)}
-              className="bg-white overflow-hidden cursor-pointer   relative"
+
+              //  shadow removed
+              className="  overflow-hidden cursor-pointer relative"
             >
-              {/* Image */}
+
+              {/* Image (BIGGER) */}
               <motion.img
                 src={item.Img}
                 alt={item.Name}
-                initial={{ scale: 1.02 }}
+                initial={{ scale: 1 }}
                 whileInView={{ scale: 1 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.5 }}
                 viewport={{ once: true }}
-                className="w-full h-48 sm:h-64 md:h-72 lg:h-80 object-cover"
+
+                //  Increased height
+                className="w-full h-56 sm:h-72 md:h-80 lg:h-[26rem] object-cover"
               />
 
               {/* Title */}
-              <h1 className="text-xl font-semibold text-black text-center py-3">
+              <h1 className="text-lg sm:text-xl font-semibold text-black text-center py-3">
                 {item.Name}
               </h1>
+
             </motion.div>
           </Link>
         ))}

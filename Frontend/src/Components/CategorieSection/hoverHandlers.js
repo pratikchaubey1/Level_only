@@ -1,15 +1,13 @@
-// hoverHandlers.js
 export function cardHoverAnimation(el) {
   if (!el) return;
-  // example: add a subtle shadow + translateY for hover
-  el.style.transition = "transform 180ms ease, box-shadow 180ms ease";
-  el.style.transform = "translateY(-6px) scale(1.02)";
-  el.style.boxShadow = "0 12px 30px rgba(16,24,40,0.12)";
+
+  el.style.transition = "transform 200ms cubic-bezier(0.25, 0.8, 0.25, 1)";
+  el.style.transform = "translateY(-8px) scale(1.03)";
 }
 
 export function cardHoverOutAnimation(el) {
   if (!el) return;
-  el.style.transition = "transform 160ms ease, box-shadow 160ms ease";
+
+  el.style.transition = "transform 180ms cubic-bezier(0.25, 0.8, 0.25, 1)";
   el.style.transform = "translateY(0) scale(1)";
-  el.style.boxShadow = "0 6px 18px rgba(16,24,40,0.06)";
 }

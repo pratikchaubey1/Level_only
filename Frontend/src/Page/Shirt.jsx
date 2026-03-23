@@ -107,9 +107,9 @@ function Shirt() {
                 key={item.id}
                 data-product-id={item.id}
                 onClick={() => handleProductClick(item)}
-                className="bg-white overflow-hidden hover:scale-105 transform transition duration-300 ease-in-out w-full cursor-pointer shadow-sm hover:shadow-md animate-product-card"
+                className="bg-white rounded-md md:rounded-none overflow-hidden hover:scale-105 active:scale-95 md:active:scale-100 transform transition duration-300 ease-in-out w-full cursor-pointer shadow-sm hover:shadow-md animate-product-card"
               >
-                <div className="relative h-64 sm:h-72 md:h-80 w-full">
+                <div className="relative h-48 sm:h-64 md:h-80 w-full">
                   <img
                     src={item.Img}
                     alt={item.Name}
@@ -179,9 +179,9 @@ function Shirt() {
                 key={item.id}
                 data-product-id={item.id}
                 onClick={() => handleProductClick(item)}
-                className="bg-white overflow-hidden hover:scale-105 transform transition duration-300 ease-in-out w-full cursor-pointer shadow-sm hover:shadow-md animate-product-card"
+                className="bg-white rounded-md md:rounded-none overflow-hidden hover:scale-105 active:scale-95 md:active:scale-100 transform transition duration-300 ease-in-out w-full cursor-pointer shadow-sm hover:shadow-md animate-product-card"
               >
-                <div className="relative h-64 sm:h-72 md:h-80 w-full">
+                <div className="relative h-48 sm:h-64 md:h-80 w-full">
                   <img
                     src={item.Img}
                     alt={item.Name}

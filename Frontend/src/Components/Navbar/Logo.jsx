@@ -14,22 +14,17 @@ const Logo = () => {
   return (
      <Link to="/" className="font-playfair tracking-widest w-full">
       <div
-        className={`flex items-center mt-5 ${
+        className={`flex items-center mt-2 ${
           isDesktop ? "justify-center" : "justify-start px-4"
         }`}
       >
-        <motion.h1
-          style={
-            isLanding
-              ? { fontSize: logoSize, y: logoY, x: isDesktop ? "0vw" : logoX }
-              : { fontSize: "3vw", y: 1, x: -11 }
-          }
-          className={`font-serif transition-colors duration-500 ${
-            isscroll ? "text-gray-900" : isLanding ? "text-gray-100" : "text-gray-900"
-          }`}
-        >
-          {isDesktop ? "L E V E L" : "LEVEL"}
-        </motion.h1>
+       <motion.h1
+  className={`font-serif text-3xl md:text-5xl lg:text-6xl transition-colors duration-500 ${
+    isscroll ? "text-gray-900" : isLanding ? "text-gray-100" : "text-gray-900"
+  }`}
+>
+  {isDesktop ? "L E V E L" : "LEVEL"}
+</motion.h1>
       </div>
     </Link>
   );

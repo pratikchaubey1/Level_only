@@ -41,10 +41,10 @@ function ProfileMenu() {
       {/* Profile Button */}
       <button
         onClick={() => setProfileOpen((prev) => !prev)}
-        className="text-gray-700 transition-colors transition-transform duration-200 border-b-2 border-transparent hover:text-red-500 hover:border-red-500 hover:scale-110 text-3xl"
+        className="text-current transition-all duration-200 border-b-2 border-transparent hover:text-red-500 hover:border-red-500 hover:scale-110 flex items-center justify-center py-1"
         aria-label="Profile"
       >
-        <FiUser className="text-2xl" />
+        <FiUser className="text-3xl" />
       </button>
 
       {/* Dropdown Menu */}

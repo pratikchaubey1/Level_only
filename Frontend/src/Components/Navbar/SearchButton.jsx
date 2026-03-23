@@ -23,15 +23,15 @@ const SearchButton = () => {
     setIsSearchOpen(false);
     setSearchTerm("");
     
-    // Navigate to the appropriate category page
+    // Navigate to the appropriate category page (match lowercase category values in data)
     const categoryRoutes = {
-      'Sneakers': '/Sneaker',
-      'Bags': '/Bag',
-      'Jeans': '/Jeans',
-      'Shirts': '/Shirt'
+      'sneakers': '/Sneaker',
+      'bags': '/Bag',
+      'jeans': '/Jeans',
+      'shirts': '/Shirt'
     };
     
-    const route = categoryRoutes[product.category] || '/All';
+    const route = categoryRoutes[product.category?.toLowerCase()] || '/All';
     navigate(route);
     
     // Scroll to product after navigation
@@ -47,9 +47,9 @@ const SearchButton = () => {
     <div className="relative">
       <button
         onClick={() => setIsSearchOpen(true)}
-        className="hover:text-red-700 transition-all duration-300 mt-1 border-b-2 border-transparent hover:border-red-700"
+        className="text-current transition-all duration-200 border-b-2 border-transparent hover:text-red-500 hover:border-red-500 hover:scale-110 flex items-center justify-center py-1"
       >
-        <IoIosSearch className="text-2xl" />
+        <IoIosSearch className="text-3xl" />
       </button>
 
       {isSearchOpen && (
