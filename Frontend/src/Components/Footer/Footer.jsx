@@ -10,24 +10,26 @@ function Footer() {
   }, []);
 
   return (
-    <footer className="bg-black text-gray-200 px-4 py-14 mt-10 animate-footer">
+    <footer className="bg-black text-gray-200 px-4 py-20 mt-10 animate-footer">
       {/* Top Main Section */}
-      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+      <div className="max-w-8xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
         {/* Left Info */}
         <div className="text-xs leading-relaxed">
           <p>Wide Range of Products</p>
           <p>Latest Trends & Offers</p>
           <p>Secure Shopping</p>
         </div>
+
         {/* Center Name */}
         <div className="flex flex-col items-center justify-center text-center">
-          <h1 className="text-5xl sm:text-7xl font-semibold text-white tracking-tighter mb-4">
+          <h1 className="text-7xl  sm:text-8xl md:text-8xl font-serif text-white tracking-tight leading-none mb-4">
             L E V E L
           </h1>
         </div>
+
         {/* Right Info */}
         <div className="text-xs text-right leading-relaxed">
-          <p> More than  years of experience</p>
+          <p> More than years of experience</p>
           <a
             href="#"
             className="underline text-gray-400 hover:text-white block my-1"
@@ -39,9 +41,9 @@ function Footer() {
             <br />
             2025
           </p>
+
           {/* Social Media Buttons */}
           <div className="flex justify-end gap-6 mt-2 text-[1rem]">
-            {/* Github */}
             <a
               href="https://github.com/pratikchaubey1"
               target="_blank"
@@ -52,7 +54,6 @@ function Footer() {
               Github
             </a>
 
-            {/* Instagram */}
             <a
               href="https://www.instagram.com/_prabonly/"
               target="_blank"
@@ -63,7 +64,6 @@ function Footer() {
               Instagram
             </a>
 
-            {/* X (Twitter) */}
             <a
               href="https://x.com/Prab01036553944"
               target="_blank"
@@ -85,6 +85,7 @@ function Footer() {
           </a>
           <span>Pratikup89@gmail.com.</span>
         </div>
+
         <div className="flex gap-4 text-center">
           <span>
             &copy; 2025 Template by{" "}
